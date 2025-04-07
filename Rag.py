@@ -35,4 +35,7 @@ class SportsKnowledgeBase:
             embedding=self.embeddings
         )
     
-    def query(self, question: str, k: int = 3
+    def query(self, question: str, k: int = 3) -> str:
+        """Retrieve relevant context from knowledge base"""
+        docs = self.vector_store.similarity_search(question, k=k)
+        return "\n\n".join([d.page_content for d in docs])
